@@ -38,6 +38,7 @@ router.use([
   () => import('@adonisjs/shield/shield_middleware'),
   () => import('@adonisjs/auth/initialize_auth_middleware'),
   () => import('#middleware/silent_auth_middleware'),
+  () => import('#middleware/role_middleware'),
 ])
 
 /**
@@ -46,4 +47,5 @@ router.use([
  */
 export const middleware = router.named({
   auth: () => import('#middleware/auth_middleware'),
+  role: () => import('#middleware/role_middleware'),
 })

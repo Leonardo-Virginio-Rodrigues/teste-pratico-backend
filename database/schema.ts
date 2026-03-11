@@ -7,6 +7,31 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class AuthAccessTokenSchema extends BaseModel {
+  static $columns = ['abilities', 'createdAt', 'expiresAt', 'hash', 'id', 'lastUsedAt', 'name', 'tokenableId', 'type', 'updatedAt'] as const
+  $columns = AuthAccessTokenSchema.$columns
+  @column()
+  declare abilities: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare expiresAt: DateTime | null
+  @column()
+  declare hash: string
+  @column({ isPrimary: true })
+  declare id: number
+  @column.dateTime()
+  declare lastUsedAt: DateTime | null
+  @column()
+  declare name: string | null
+  @column()
+  declare tokenableId: number
+  @column()
+  declare type: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class ClientSchema extends BaseModel {
   static $columns = ['createdAt', 'email', 'id', 'name', 'updatedAt'] as const
   $columns = ClientSchema.$columns
@@ -23,15 +48,7 @@ export class ClientSchema extends BaseModel {
 }
 
 export class GatewaySchema extends BaseModel {
-  static $columns = [
-    'baseUrl',
-    'createdAt',
-    'id',
-    'isActive',
-    'name',
-    'priority',
-    'updatedAt',
-  ] as const
+  static $columns = ['baseUrl', 'createdAt', 'id', 'isActive', 'name', 'priority', 'updatedAt'] as const
   $columns = GatewaySchema.$columns
   @column()
   declare baseUrl: string | null
@@ -67,16 +84,7 @@ export class ProductSchema extends BaseModel {
 }
 
 export class TransactionProductSchema extends BaseModel {
-  static $columns = [
-    'createdAt',
-    'id',
-    'productId',
-    'quantity',
-    'totalAmount',
-    'transactionId',
-    'unitAmount',
-    'updatedAt',
-  ] as const
+  static $columns = ['createdAt', 'id', 'productId', 'quantity', 'totalAmount', 'transactionId', 'unitAmount', 'updatedAt'] as const
   $columns = TransactionProductSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -97,17 +105,7 @@ export class TransactionProductSchema extends BaseModel {
 }
 
 export class TransactionSchema extends BaseModel {
-  static $columns = [
-    'amount',
-    'cardLastNumbers',
-    'clientId',
-    'createdAt',
-    'externalId',
-    'gatewayId',
-    'id',
-    'status',
-    'updatedAt',
-  ] as const
+  static $columns = ['amount', 'cardLastNumbers', 'clientId', 'createdAt', 'externalId', 'gatewayId', 'id', 'status', 'updatedAt'] as const
   $columns = TransactionSchema.$columns
   @column()
   declare amount: string
