@@ -10,6 +10,7 @@
 import { middleware } from '#start/kernel'
 import router from '@adonisjs/core/services/router'
 import { controllers } from '#generated/controllers'
+import { ROLES } from '../app/constants/roles.ts'
 
 router.get('/', () => {
   return { hello: 'world' }
@@ -17,21 +18,24 @@ router.get('/', () => {
 
 router
   .group(() => {
+    // Auth
     router
       .group(() => {
-        router.post('signup', [controllers.NewAccount, 'store'])
-        router.post('login', [controllers.AccessToken, 'store'])
-        router.post('logout', [controllers.AccessToken, 'destroy']).use(middleware.auth())
+        router.post('login', [controllers.Auth, 'login'])
+        router.post('logout', [controllers.Auth, 'logout']).use(middleware.auth())
       })
       .prefix('auth')
       .as('auth')
 
+    // User
     router
       .group(() => {
-        router.get('/profile', [controllers.Profile, 'show'])
+        router
+          .post('signup', [controllers.Users, 'signup'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN]))
       })
-      .prefix('account')
-      .as('profile')
-      .use(middleware.auth())
+      .prefix('users')
+      .as('users')
   })
   .prefix('/api/v1')
