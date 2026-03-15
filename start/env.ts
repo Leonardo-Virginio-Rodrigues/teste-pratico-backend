@@ -34,5 +34,15 @@ export default await Env.create(new URL('../', import.meta.url), {
   DB_PORT: Env.schema.number(),
   DB_USER: Env.schema.string(),
   DB_PASSWORD: Env.schema.string.optional(),
-  DB_DATABASE: Env.schema.string()
+  DB_DATABASE: Env.schema.string(),
+
+  // MySQL DB
+  MYSQL_ROOT_PASSWORD: Env.schema.string(),
+  MYSQL_DATABASE: Env.schema.string(),
+  MYSQL_USER: Env.schema.string(),
+  MYSQL_PASSWORD: Env.schema.string(),
+
+  // Create ADMIN USER
+  ADMIN_EMAIL: Env.schema.string(),
+  ADMIN_PASSWORD: Env.schema.string(),
 })
