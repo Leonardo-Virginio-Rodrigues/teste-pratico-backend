@@ -34,6 +34,22 @@ router
           .post('signup', [controllers.Users, 'signup'])
           .use(middleware.auth())
           .use(middleware.role([ROLES.ADMIN]))
+        router
+          .get('', [controllers.Users, 'findAll'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.MANAGER]))
+        router
+          .get(':id', [controllers.Users, 'findOne'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.MANAGER]))
+        router
+          .patch(':id', [controllers.Users, 'updateOne'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.MANAGER]))
+        router
+          .delete(':id', [controllers.Users, 'deleteOne'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.MANAGER]))
       })
       .prefix('users')
       .as('users')
