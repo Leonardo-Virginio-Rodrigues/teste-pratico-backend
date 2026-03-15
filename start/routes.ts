@@ -53,5 +53,32 @@ router
       })
       .prefix('users')
       .as('users')
+
+    // Products
+    router
+      .group(() => {
+        router
+          .post('', [controllers.Products, 'create'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.MANAGER, ROLES.FINANCE]))
+        router
+          .get('', [controllers.Products, 'findAll'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.MANAGER, ROLES.FINANCE]))
+        router
+          .get(':id', [controllers.Products, 'findOne'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.MANAGER, ROLES.FINANCE]))
+        router
+          .patch(':id', [controllers.Products, 'updateOne'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.MANAGER, ROLES.FINANCE]))
+        router
+          .delete(':id', [controllers.Products, 'deleteOne'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.MANAGER, ROLES.FINANCE]))
+      })
+      .prefix('products')
+      .as('products')
   })
   .prefix('/api/v1')

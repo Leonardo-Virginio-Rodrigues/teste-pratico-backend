@@ -17,4 +17,13 @@ export interface ApiDefinition {
       deleteOne: typeof routes['users.users.delete_one']
     }
   }
+  products: {
+    products: {
+      create: typeof routes['products.products.create']
+      findAll: typeof routes['products.products.find_all']
+      findOne: typeof routes['products.products.find_one']
+      updateOne: typeof routes['products.products.update_one']
+      deleteOne: typeof routes['products.products.delete_one']
+    }
+  }
 }
