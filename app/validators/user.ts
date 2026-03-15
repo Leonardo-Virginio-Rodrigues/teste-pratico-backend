@@ -8,7 +8,7 @@ const password = () => vine.string().minLength(8).maxLength(32)
 const name = () => vine.string().minLength(8).maxLength(124)
 const role = () => vine.enum(['ADMIN', 'MANAGER', 'FINANCE', 'USER'])
 /**
- * Validator to use when performing self-signup
+ * Validator to use when performing signup
  */
 export const signupValidator = vine.create({
   name: name(),
@@ -16,6 +16,16 @@ export const signupValidator = vine.create({
   role: role(),
   password: password(),
   passwordConfirmation: password().sameAs('password'),
+})
+
+/**
+ * Validator to use when performing update user
+ */
+export const updateOneValidator = vine.create({
+  name: name().optional(),
+  email: email().unique({ table: 'users', column: 'email' }).optional(),
+  role: role().optional(),
+  password: password().optional(),
 })
 
 /**

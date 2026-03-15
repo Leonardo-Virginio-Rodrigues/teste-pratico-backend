@@ -11,6 +11,10 @@ export interface ApiDefinition {
   users: {
     users: {
       signup: typeof routes['users.users.signup']
+      findAll: typeof routes['users.users.find_all']
+      findOne: typeof routes['users.users.find_one']
+      updateOne: typeof routes['users.users.update_one']
+      deleteOne: typeof routes['users.users.delete_one']
     }
   }
 }
