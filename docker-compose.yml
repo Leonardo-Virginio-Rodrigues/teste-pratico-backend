@@ -1,0 +1,62 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: multi_gateway_app
+    restart: unless-stopped
+    ports:
+      - '${PORT}:${PORT}'
+    env_file:
+      - .env
+    environment:
+      HOST: 0.0.0.0
+      DB_HOST: mysql
+      DB_PORT: 3306
+    depends_on:
+      mysql:
+        condition: service_healthy
+      gateways-mock:
+        condition: service_started
+    command: sh -c "node ace migration:run && node ace db:seed && npm run dev"
+    networks:
+      - multi_gateway_network
+
+  mysql:
+    image: mysql:8.4
+    container_name: multi_gateway_mysql
+    restart: unless-stopped
+    ports:
+      - '${DB_PORT}:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-p${MYSQL_ROOT_PASSWORD}']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - multi_gateway_network
+
+  gateways-mock:
+    image: matheusprotzen/gateways-mock
+    container_name: multi_gateway_gateways_mock
+    ports:
+      - '3001:3001'
+      - '3002:3002'
+    networks:
+      - multi_gateway_network
+
+volumes:
+  mysql_data:
+
+networks:
+  multi_gateway_network:
+    driver: bridge
