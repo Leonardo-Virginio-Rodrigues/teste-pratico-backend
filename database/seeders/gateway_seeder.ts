@@ -10,7 +10,7 @@ export default class GatewaySeeder extends BaseSeeder {
         name: 'gateway_1',
         isActive: true,
         priority: 1,
-        baseUrl: 'http://localhost:3001',
+        baseUrl: 'http://gateways-mock:3001',
       })
     }
 
@@ -21,7 +21,7 @@ export default class GatewaySeeder extends BaseSeeder {
         name: 'gateway_2',
         isActive: true,
         priority: 2,
-        baseUrl: 'http://localhost:3002',
+        baseUrl: 'http://gateways-mock:3002',
       })
     }
   }
