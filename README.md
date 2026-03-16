@@ -193,6 +193,7 @@ Just look at the env.example file.
 ## Routes
 ### Postman Collection
 The Postman collection used for testing the API is available here:
-[Download Postman Collection]([./postman/multi-gateway-api.postman_collection.json](https://github.com/Leonardo-Virginio-Rodrigues/teste-pratico-backend/blob/feature/implements-docker-for-run-project/postman/test-backend.postman_collection.json))
+
+[Download Postman Collection](./postman/test-backend.postman_collection.json)
 
 Import the file into Postman to test all endpoints.
