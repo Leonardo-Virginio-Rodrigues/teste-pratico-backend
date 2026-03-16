@@ -78,6 +78,60 @@ const routes = {
     tokens: [{"old":"/api/v1/products/:id","type":0,"val":"api","end":""},{"old":"/api/v1/products/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/products/:id","type":0,"val":"products","end":""},{"old":"/api/v1/products/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['products.products.delete_one']['types'],
   },
+  'gateways.gateways.find_all': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/gateways',
+    tokens: [{"old":"/api/v1/gateways","type":0,"val":"api","end":""},{"old":"/api/v1/gateways","type":0,"val":"v1","end":""},{"old":"/api/v1/gateways","type":0,"val":"gateways","end":""}],
+    types: placeholder as Registry['gateways.gateways.find_all']['types'],
+  },
+  'gateways.gateways.update_status': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/gateways/:id/status',
+    tokens: [{"old":"/api/v1/gateways/:id/status","type":0,"val":"api","end":""},{"old":"/api/v1/gateways/:id/status","type":0,"val":"v1","end":""},{"old":"/api/v1/gateways/:id/status","type":0,"val":"gateways","end":""},{"old":"/api/v1/gateways/:id/status","type":1,"val":"id","end":""},{"old":"/api/v1/gateways/:id/status","type":0,"val":"status","end":""}],
+    types: placeholder as Registry['gateways.gateways.update_status']['types'],
+  },
+  'gateways.gateways.update_priority': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/gateways/:id/priority',
+    tokens: [{"old":"/api/v1/gateways/:id/priority","type":0,"val":"api","end":""},{"old":"/api/v1/gateways/:id/priority","type":0,"val":"v1","end":""},{"old":"/api/v1/gateways/:id/priority","type":0,"val":"gateways","end":""},{"old":"/api/v1/gateways/:id/priority","type":1,"val":"id","end":""},{"old":"/api/v1/gateways/:id/priority","type":0,"val":"priority","end":""}],
+    types: placeholder as Registry['gateways.gateways.update_priority']['types'],
+  },
+  'transactions.transactions.store': {
+    methods: ["POST"],
+    pattern: '/api/v1/transactions/store',
+    tokens: [{"old":"/api/v1/transactions/store","type":0,"val":"api","end":""},{"old":"/api/v1/transactions/store","type":0,"val":"v1","end":""},{"old":"/api/v1/transactions/store","type":0,"val":"transactions","end":""},{"old":"/api/v1/transactions/store","type":0,"val":"store","end":""}],
+    types: placeholder as Registry['transactions.transactions.store']['types'],
+  },
+  'transactions.transactions.refund': {
+    methods: ["POST"],
+    pattern: '/api/v1/transactions/:id/refund',
+    tokens: [{"old":"/api/v1/transactions/:id/refund","type":0,"val":"api","end":""},{"old":"/api/v1/transactions/:id/refund","type":0,"val":"v1","end":""},{"old":"/api/v1/transactions/:id/refund","type":0,"val":"transactions","end":""},{"old":"/api/v1/transactions/:id/refund","type":1,"val":"id","end":""},{"old":"/api/v1/transactions/:id/refund","type":0,"val":"refund","end":""}],
+    types: placeholder as Registry['transactions.transactions.refund']['types'],
+  },
+  'transactions.transactions.find_all': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/transactions',
+    tokens: [{"old":"/api/v1/transactions","type":0,"val":"api","end":""},{"old":"/api/v1/transactions","type":0,"val":"v1","end":""},{"old":"/api/v1/transactions","type":0,"val":"transactions","end":""}],
+    types: placeholder as Registry['transactions.transactions.find_all']['types'],
+  },
+  'transactions.transactions.find_one': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/transactions/:id',
+    tokens: [{"old":"/api/v1/transactions/:id","type":0,"val":"api","end":""},{"old":"/api/v1/transactions/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/transactions/:id","type":0,"val":"transactions","end":""},{"old":"/api/v1/transactions/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['transactions.transactions.find_one']['types'],
+  },
+  'clients.clients.find_one': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/clients/:id',
+    tokens: [{"old":"/api/v1/clients/:id","type":0,"val":"api","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/clients/:id","type":0,"val":"clients","end":""},{"old":"/api/v1/clients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['clients.clients.find_one']['types'],
+  },
+  'clients.clients.find_all': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/clients',
+    tokens: [{"old":"/api/v1/clients","type":0,"val":"api","end":""},{"old":"/api/v1/clients","type":0,"val":"v1","end":""},{"old":"/api/v1/clients","type":0,"val":"clients","end":""}],
+    types: placeholder as Registry['clients.clients.find_all']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

@@ -26,4 +26,25 @@ export interface ApiDefinition {
       deleteOne: typeof routes['products.products.delete_one']
     }
   }
+  gateways: {
+    gateways: {
+      findAll: typeof routes['gateways.gateways.find_all']
+      updateStatus: typeof routes['gateways.gateways.update_status']
+      updatePriority: typeof routes['gateways.gateways.update_priority']
+    }
+  }
+  transactions: {
+    transactions: {
+      store: typeof routes['transactions.transactions.store']
+      refund: typeof routes['transactions.transactions.refund']
+      findAll: typeof routes['transactions.transactions.find_all']
+      findOne: typeof routes['transactions.transactions.find_one']
+    }
+  }
+  clients: {
+    clients: {
+      findOne: typeof routes['clients.clients.find_one']
+      findAll: typeof routes['clients.clients.find_all']
+    }
+  }
 }

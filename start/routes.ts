@@ -80,5 +80,59 @@ router
       })
       .prefix('products')
       .as('products')
+
+    // Gateways
+    router
+      .group(() => {
+        router
+          .get('', [controllers.Gateways, 'findAll'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN]))
+        router
+          .patch(':id/status', [controllers.Gateways, 'updateStatus'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN]))
+        router
+          .patch(':id/priority', [controllers.Gateways, 'updatePriority'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN]))
+      })
+      .prefix('gateways')
+      .as('gateways')
+
+    // Transactions
+    router
+      .group(() => {
+        router.post('store', [controllers.Transactions, 'store'])
+        router
+          .post(':id/refund', [controllers.Transactions, 'refund'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.FINANCE]))
+        router
+          .get('', [controllers.Transactions, 'findAll'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.USER]))
+        router
+          .get(':id', [controllers.Transactions, 'findOne'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.USER]))
+      })
+      .prefix('transactions')
+      .as('transactions')
+
+    // Clients
+    router
+      .group(() => {
+        router
+          .get(':id', [controllers.Clients, 'findOne'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.USER]))
+        router
+          .get('', [controllers.Clients, 'findAll'])
+          .use(middleware.auth())
+          .use(middleware.role([ROLES.ADMIN, ROLES.USER]))
+      })
+      .prefix('clients')
+      .as('clients')
   })
   .prefix('/api/v1')
